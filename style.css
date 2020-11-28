@@ -1,0 +1,72 @@
+.text-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-template-rows: min-content 1fr;
+}
+
+header {
+    grid-column-start: span 2;
+}
+
+header h1 {
+    font-size: 1.2rem;
+    color: gray;
+}
+
+aside {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    width: fit-content;
+    grid-column-gap: 10px;
+    grid-row-gap: 5px;
+    overflow-x: hidden;
+}
+
+aside .row {
+    grid-column-start: span 4;
+}
+
+.ratio-h,
+.ratio-v {
+    width: 40px;
+}
+
+.inches {
+    width: 60px;
+}
+
+.inputShown {
+    position: relative;
+}
+
+.inputShown > input,
+.inputShown + div,
+.inputShown + div + div,
+.inputShown + div + div + div {
+    z-index: 1;
+}
+
+.inputShown.selected::before {
+    content: '';
+    position: absolute;
+    width: 1000%;
+    height: 100%;
+    left: 0;
+    background-color: #1da1f2;
+}
+
+.del {
+    cursor: pointer;
+    margin-right: 10px;
+    color: lightgray;
+}
+
+.del:hover {
+    color: #000000;
+}
