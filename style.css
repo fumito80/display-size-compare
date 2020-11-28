@@ -7,16 +7,7 @@
 body {
     display: grid;
     grid-template-columns: max-content 1fr;
-    grid-template-rows: min-content 1fr;
-}
-
-header {
-    grid-column-start: span 2;
-}
-
-header h1 {
-    font-size: 1.2rem;
-    color: gray;
+    grid-template-rows: 1fr;
 }
 
 aside {
@@ -28,7 +19,12 @@ aside {
     overflow-x: hidden;
 }
 
-aside .row {
+header h1 {
+    font-size: 1.2rem;
+    color: gray;
+}
+
+.aside-row {
     grid-column-start: span 4;
 }
 
