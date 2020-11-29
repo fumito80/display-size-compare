@@ -17,14 +17,17 @@ body {
 }
 
 aside {
+    overflow-x: hidden;
+    margin-left: 15px;
+}
+
+aside > form {
     display: grid;
     grid-template-columns: auto auto auto auto;
     width: fit-content;
     height: fit-content;
     grid-column-gap: 10px;
     grid-row-gap: 5px;
-    overflow-x: hidden;
-    margin-left: 15px;
 }
 
 header h1 {

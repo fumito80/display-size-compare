@@ -10,10 +10,17 @@ function $$(selector, context = document) {
   return [...context.querySelectorAll(selector)];
 }
 
-function addDisplayProp() {
+function addDisplayProp(e) {
+  e && e.preventDefault();
+  const $focus = $(':focus');
+  if ($focus && $focus.value === '') {
+    return;
+  }
   const $props = $('.display-prop', $('template').content);
   const node = document.importNode($props, true);
-  $('aside').append(...node.children);
+  const inches = $('.inches', node);
+  $('form').append(...node.children);
+  inches.focus();
 }
 
 function setInputValues(classAndValues, context = document) {
@@ -38,7 +45,6 @@ function changeShown(inputShown) {
     if (notIntIndex !== -1) {
       inputParams[notIntIndex].focus();
       inputShown.checked = false;
-      return;
     }
   }
   inputShown.parentElement.classList.toggle('selected', inputShown.checked);
@@ -48,6 +54,7 @@ function changeShown(inputShown) {
 function removeProp(target) {
   [...Array(3)].map(() => target.parentElement.previousElementSibling.remove());
   target.parentElement.remove();
+  drawScreen();
 }
 
 function onChangeInput(e) {
@@ -56,6 +63,12 @@ function onChangeInput(e) {
       changeShown(e.target);
       break;
     default:
+      let inputShown = e.target.parentElement.previousElementSibling;
+      while (inputShown && !inputShown.classList.contains('inputShown')) {
+        inputShown = inputShown.previousElementSibling;
+      }
+      inputShown.firstElementChild.checked = true;
+      changeShown(inputShown.firstElementChild);
   }
 }
 
@@ -69,9 +82,10 @@ function onClickElement(e) {
 }
 
 function init() {
-  $('.add-display').addEventListener('click', addDisplayProp);
-  document.addEventListener('change', onChangeInput);
-  document.addEventListener('click', onClickElement);
+  const $form = $('form');
+  $form.addEventListener('submit', addDisplayProp);
+  $form.addEventListener('change', onChangeInput);
+  $form.addEventListener('click', onClickElement);
   addDisplayProp();
   setInputValues([
     ['.ratio-h', 16],
