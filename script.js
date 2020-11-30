@@ -77,11 +77,21 @@ function onClickElement(e) {
   }
 }
 
+function onClickRefPos(e) {
+  if (e.target.classList.contains('box')) {
+    return;
+  }
+  $('.ref-pos .selected').classList.remove('selected');
+  e.target.classList.add('selected');
+  drawScreen();
+}
+
 function init() {
   const $form = $('form');
   $form.addEventListener('submit', addDisplayProp);
   $form.addEventListener('change', onChangeInput);
   $form.addEventListener('click', onClickElement);
+  $('.ref-pos .box').addEventListener('click', onClickRefPos)
   addDisplayProp();
   setInputValues([
     ['.ratio-h', 16],
@@ -92,14 +102,32 @@ function init() {
   changeShown($('.shown'));
 }
 
-function drawScreen() {
-  const rects = $$('.shown:checked').map((inputShown) => {
+function getScreenRects() {
+  return $$('.shown:checked').map((inputShown) => {
     const [[inches, ratioH, ratioV]] = getParams(inputShown);
     const rad = Math.atan(ratioV / ratioH);
     const inW = inches * Math.cos(rad);
     const inH = inches * Math.sin(rad);
     return [inW, inH];
   });
+}
+
+function getPosFn(pos) {
+  switch (pos) {
+    case 1:
+      return (scale, max, val) => (max - val) / 2 * scale;
+    case 2:
+      return (scale, max, val) => (max - val) * scale;
+    default:
+      return () => 0;
+  }
+}
+
+function drawScreen() {
+  const rects = getScreenRects();
+  const refPos = $$('.ref-pos > .box > div').indexOf($('.ref-pos .selected'));
+  const getleft = getPosFn(Math.trunc(refPos % 3));
+  const getTop = getPosFn(Math.trunc(refPos / 3));
   const $main = $('main');
   $main.innerHTML = '';
   if (rects.length === 0) {
@@ -111,10 +139,11 @@ function drawScreen() {
   const isHeightRelative = (rectMain.height / maxH * maxW) < rectMain.width;
   const scale = isHeightRelative ? rectMain.height / maxH : rectMain.width / maxW;
   const screens = rects.map(([w, h]) => {
-    const top = (maxH - h) * scale;
+    const left = getleft(scale, maxW, w);
+    const top = getTop(scale, maxH, h);
     const width = w * scale;
     const height = h * scale;
-    return `<div class="screen" style="top: ${top}px; width: ${width}px; height: ${height}px;"></div>`;
+    return `<div class="screen" style="left: ${left}px; top: ${top}px; width: ${width}px; height: ${height}px;"></div>`;
   });
   $main.innerHTML = screens.join('');
 }
