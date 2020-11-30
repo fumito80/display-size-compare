@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script async src="script.js"></script>
     <title>Display size comparison</title>
 </head>
 <body>
@@ -16,7 +15,7 @@
             <div class="aside-row">
                 <input type="submit" class="add-display" value="Add display">
             </div>
-            <div>Show</div>
+            <div></div>
             <div class="header-inches text-center">Inches</div>
             <div class="header-aspect-ratio text-center">Aspect ratio</div>
             <div class="text-center"></div>
@@ -29,15 +28,16 @@
                 <input type="checkbox" class="shown">
             </label>
             <div>
-                <input class="inches" type="number" step="0.1" min="0.1">
+                <input class="inches" type="number" step="0.1" min="0.1" required>
             </div>
             <div>
-                <input class="ratio-h" type="number" step="1" min="1"><span>:</span><input class="ratio-v" type="number" step="1" min="1">
+                <input class="ratio-h" type="number" step="1" min="1" required><span>:</span><input class="ratio-v" type="number" step="1" min="1" required>
             </div>
             <div class="text-center">
                 <span class="del">&times;</span>
             </div>
         </div>
     </template>
+    <script src="script.js"></script>
 </body>
 </html>

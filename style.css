@@ -14,6 +14,8 @@ body {
     grid-template-columns: max-content 1fr;
     grid-template-rows: 1fr;
     margin: 0;
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 aside {
@@ -41,11 +43,13 @@ header h1 {
 
 .ratio-h,
 .ratio-v {
-    width: 40px;
+    width: 45px;
+    margin: 3px;
 }
 
 .inches {
     width: 60px;
+    margin: 3px;
 }
 
 .inputShown {
@@ -59,12 +63,15 @@ header h1 {
     z-index: 1;
 }
 
-.inputShown.selected::before {
+.inputShown::before {
     content: '';
     position: absolute;
-    width: 1000%;
+    width: 100vw;
     height: 100%;
     left: 0;
+}
+
+.inputShown.selected::before {
     background-color: #1da1f2;
 }
 

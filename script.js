@@ -1,6 +1,6 @@
 // const MM = 25.4;
 
-document.readyState !== 'loading' ? init() : document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', init);
 
 function $(selector, context = document) {
   return context.querySelector(selector);
@@ -12,10 +12,6 @@ function $$(selector, context = document) {
 
 function addDisplayProp(e) {
   e && e.preventDefault();
-  const $focus = $(':focus');
-  if ($focus && $focus.value === '') {
-    return;
-  }
   const $props = $('.display-prop', $('template').content);
   const node = document.importNode($props, true);
   const inches = $('.inches', node);
