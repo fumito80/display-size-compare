@@ -18,8 +18,14 @@ body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+@media (orientation: portrait) {
+    body {
+        grid-template-columns: 1fr;
+        grid-template-rows: min-content 1fr;
+    }
+}
+
 aside {
-    overflow-x: hidden;
     margin-left: 15px;
 }
 
@@ -30,6 +36,7 @@ aside > form {
     height: fit-content;
     grid-column-gap: 10px;
     grid-row-gap: 5px;
+    overflow-x: hidden;
 }
 
 header h1 {
