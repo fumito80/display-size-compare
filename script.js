@@ -125,14 +125,14 @@ function getPosFn(pos) {
 
 function drawScreen() {
   const rects = getScreenRects();
-  const refPos = $$('.ref-pos > .box > div').indexOf($('.ref-pos .selected'));
-  const getleft = getPosFn(Math.trunc(refPos % 3));
-  const getTop = getPosFn(Math.trunc(refPos / 3));
   const $main = $('main');
   $main.innerHTML = '';
   if (rects.length === 0) {
     return;
   }
+  const refPos = $$('.ref-pos > .box > div').indexOf($('.ref-pos .selected'));
+  const getleft = getPosFn(Math.trunc(refPos % 3));
+  const getTop = getPosFn(Math.trunc(refPos / 3));
   const maxW = Math.max(...rects.map(([w]) => w));
   const maxH = Math.max(...rects.map(([, h]) => h));
   const rectMain = $main.getBoundingClientRect();
