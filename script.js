@@ -10,7 +10,7 @@ function $$(selector, context = document) {
   return [...context.querySelectorAll(selector)];
 }
 
-function addDisplayProp(e) {
+function onSubmit(e) {
   e && e.preventDefault();
   const $props = $('.display-prop', $('template').content);
   const node = document.importNode($props, true);
@@ -86,13 +86,31 @@ function onClickRefPos(e) {
   drawScreen();
 }
 
+function onClickFullscreen(e) {
+  e.target.classList.toggle('on');
+  const fullscreen = e.target.classList.contains('on');
+  document.body.classList.toggle('fullscreen-on', fullscreen);
+  drawScreen();
+}
+
+function onClickMain() {
+  if (document.body.classList.contains('fullscreen-on')) {
+    document.body.classList.remove('fullscreen-on');
+    $('.fullscreen').classList.remove('on');
+    drawScreen();
+  }
+}
+
 function init() {
   const $form = $('form');
-  $form.addEventListener('submit', addDisplayProp);
+  $form.addEventListener('submit', onSubmit);
   $form.addEventListener('change', onChangeInput);
   $form.addEventListener('click', onClickElement);
-  $('.ref-pos .box').addEventListener('click', onClickRefPos)
-  addDisplayProp();
+  $('.ref-pos .box').addEventListener('click', onClickRefPos);
+  $('.fullscreen').addEventListener('click', onClickFullscreen);
+  $('main').addEventListener('click', onClickMain);
+  // Init display
+  onSubmit();
   setInputValues([
     ['.ratio-h', 16],
     ['.ratio-v', 9],
@@ -133,9 +151,10 @@ function drawScreen() {
   const refPos = $$('.ref-pos > .box > div').indexOf($('.ref-pos .selected'));
   const getleft = getPosFn(Math.trunc(refPos % 3));
   const getTop = getPosFn(Math.trunc(refPos / 3));
+  const isFullscreen = document.body.classList.contains('fullscreen-on');
   const maxW = Math.max(...rects.map(([w]) => w));
   const maxH = Math.max(...rects.map(([, h]) => h));
-  const rectMain = $main.getBoundingClientRect();
+  const rectMain = (isFullscreen ? document.body : $main).getBoundingClientRect();
   const isHeightRelative = (rectMain.height / maxH * maxW) < rectMain.width;
   const scale = isHeightRelative ? rectMain.height / maxH : rectMain.width / maxW;
   const screens = rects.map(([w, h]) => {
