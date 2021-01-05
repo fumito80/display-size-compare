@@ -1,0 +1,203 @@
+.text-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-template-rows: min-content 1fr;
+    margin: 0;
+    margin-left: 15px;
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+@media (orientation: landscape) {
+    main {
+        grid-column-start: 2;
+        grid-row-start: span 2;
+    }
+    .ref-pos {
+        grid-column-start: 1;
+        grid-row-start: 2;
+    }
+}
+
+@media (orientation: portrait) {
+    main {
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+    .ref-pos {
+        grid-column-start: 2;
+    }
+}
+
+aside {
+    margin-right: 20px;
+}
+
+aside > form {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    width: fit-content;
+    height: fit-content;
+    grid-column-gap: 10px;
+    grid-row-gap: 5px;
+    overflow-x: hidden;
+}
+
+aside header h1 {
+    font-size: 1.2rem;
+    color: gray;
+}
+
+.aside-row {
+    position: relative;
+    grid-column-start: span 4;
+}
+
+.fullscreen {
+    width: 22px;
+    height: 20px;
+    position: absolute;
+    top: 0;
+    right: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+    cursor: pointer;
+}
+
+.fullscreen > div {
+    border-color: #666;
+    border-style: solid;
+    border-width: 0;
+}
+
+.fullscreen:not(.on) > div:nth-child(1),
+.fullscreen.on > div:nth-child(4) {
+    border-top-width: 3px;
+    border-left-width: 3px;
+}
+
+.fullscreen:not(.on) > div:nth-child(2),
+.fullscreen.on > div:nth-child(3) {
+    border-top-width: 3px;
+    border-right-width: 3px;
+}
+
+.fullscreen:not(.on) > div:nth-child(3),
+.fullscreen.on > div:nth-child(2) {
+    border-bottom-width: 3px;
+    border-left-width: 3px;
+}
+
+.fullscreen:not(.on) > div:nth-child(4),
+.fullscreen.on > div:nth-child(1) {
+    border-bottom-width: 3px;
+    border-right-width: 3px;
+}
+
+.ratio-h,
+.ratio-v {
+    width: 45px;
+    margin: 3px;
+}
+
+.inches {
+    width: 60px;
+    margin: 3px;
+}
+
+.inputShown {
+    position: relative;
+}
+
+.inputShown > input,
+.inputShown + div,
+.inputShown + div + div,
+.inputShown + div + div + div {
+    z-index: 1;
+}
+
+.inputShown::before {
+    content: '';
+    position: absolute;
+    width: 100vw;
+    height: 100%;
+    left: 0;
+}
+
+.inputShown.selected::before {
+    background-color: #1da1f2;
+}
+
+.del {
+    cursor: pointer;
+    margin-right: 10px;
+    color: lightgray;
+}
+
+.del:hover {
+    color: #000000;
+}
+
+.ref-pos {
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-right: 20px;
+}
+
+.ref-pos .box {
+    max-width: 120px;
+    max-height: 100px;
+    border: 1px solid #666;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.ref-pos .box > div {
+    background-color: lightgray;
+    border-radius: 50%;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.ref-pos .box > div.selected {
+    background-color: #1da1f2;
+}
+
+main {
+    position: relative;
+    margin: 20px 25px 20px 0;
+}
+
+.screen {
+    position: absolute;
+    border: 2px solid #666;
+}
+
+.fullscreen-on {
+    overflow: hidden;
+    margin: -1px;
+}
+
+.fullscreen-on main {
+    position: fixed;
+    margin: 0;
+}
+
+.fullscreen-on aside,
+.fullscreen-on section {
+    display: none;
+}

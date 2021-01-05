@@ -3,9 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Display size comparison</title>
 </head>
 <body>
-    first commit
+    <aside>
+        <header>
+            <h1>Display size comparison</h1>
+        </header>
+        <form>
+            <div class="aside-row">
+                <input type="submit" class="add-display" value="Add display">
+                <div class="fullscreen off" title="Full screen">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            <div></div>
+            <div class="header-inches text-center">Inches</div>
+            <div class="header-aspect-ratio text-center">Aspect ratio</div>
+            <div class="text-center"></div>
+        </form>
+    </aside>
+    <section class="ref-pos">
+        <div>Reference position</div>
+        <div class="box">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div class="selected"></div>
+            <div></div>
+            <div></div>
+        </div>
+    </section>
+    <main></main>
+    <template>
+        <div class="display-prop">
+            <label class="text-center inputShown">
+                <input type="checkbox" class="shown">
+            </label>
+            <div>
+                <input class="inches" type="number" min="0" required>
+            </div>
+            <div>
+                <input class="ratio-h" type="number" min="0" required><span>:</span><input class="ratio-v" type="number" step="1" min="1" required>
+            </div>
+            <div class="text-center">
+                <span class="del">&times;</span>
+            </div>
+        </div>
+    </template>
+    <script src="script.js"></script>
 </body>
 </html>
