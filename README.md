@@ -1,1 +1,1 @@
-Display size comparison utility. See https://takadaz.github.io/display-size-compare/
+Display size comparison utility. See https://fumito80.github.io/display-size-compare/
